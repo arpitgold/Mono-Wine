@@ -14,7 +14,9 @@ RUN apt-get update && apt-get install -y software-properties-common && add-apt-r
 RUN dpkg --add-architecture i386
 RUN apt-get update && apt-get install -y wine1.8 xvfb && rm -rf /var/lib/apt/lists/*
 # Generate wine settings, waiting for wineserver to finish 
-RUN xvfb-run wine "wineboot" && while pgrep -u `whoami` wineserver > /dev/null; do sleep 1; done
+RUN xvfb-run wine "wineboot" 
+#&& while pgrep -u `whoami` wineserver > /dev/null; do sleep 1; done
+
 # For reference, generate wine settings for 32 bit windows in a custom location 
 RUN WINEPREFIX="/root/.wine32" WINEARCH="win32" xvfb-run wine "wineboot" 
 
