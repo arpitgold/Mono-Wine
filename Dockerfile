@@ -20,4 +20,4 @@ RUN xvfb-run wine "wineboot"
 # For reference, generate wine settings for 32 bit windows in a custom location 
 RUN WINEPREFIX="/root/.wine32" WINEARCH="win32" xvfb-run wine "wineboot" 
 
-CMD wine "/root/.wine/drive_c/Program Files/Internet Explorer/iexplore.exe"
+#CMD wine "/root/.wine/drive_c/Program Files/Internet Explorer/iexplore.exe"
