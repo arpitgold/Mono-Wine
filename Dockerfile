@@ -9,17 +9,10 @@ RUN echo "deb http://download.mono-project.com/repo/debian wheezy-apache24-compa
 RUN apt-get update && apt-get install -yf mono-complete mono-devel nuget ca-certificates-mono fsharp
 
 RUN locale-gen en_US.UTF-8
-RUN apt-get update && apt-get install -y software-properties-common \
-      && add-apt-repository -y ppa:ubuntu-wine/ppa
+RUN apt-get update && apt-get install -y software-properties-common && add-apt-repository -y ppa:ubuntu-wine/ppa
 # versions for wine things here: https://launchpad.net/~ubuntu-wine/+archive/ubuntu/ppa 
 RUN dpkg --add-architecture i386
-RUN apt-get update && apt-get install -y \
-      wine1.8 \
-      wine-mono4.5.6 \
-      wine-gecko2.40 \
-      wine-gecko2.40:i386 \
-      xvfb \
-      && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y wine1.8 xvfb && rm -rf /var/lib/apt/lists/*
 # Generate wine settings, waiting for wineserver to finish 
 RUN xvfb-run wine "wineboot" && while pgrep -u `whoami` wineserver > /dev/null; do sleep 1; done
 # For reference, generate wine settings for 32 bit windows in a custom location 
